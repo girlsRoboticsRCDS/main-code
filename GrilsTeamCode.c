@@ -14,22 +14,42 @@ task autonomous()
 		motor[port4]= 127;
 		motor[port3] = 127;
 		motor[port5]= 127;
-		wait1Msec(1000); //run at full speed for 1 second
+		wait1Msec(4000); //run at full speed for 6 second (6 feet)
 
 		motor[port2] = 120;
 		motor[port3]= 120;
 		motor[port4] = -60;
 		motor[port5] = -60;
-		wait1Msec(1000); //turn robot to the right facing first big thing
+		wait1Msec(2000); //turn robot to the right (about 135 degrees) facing first big thing
 
 		motor[port2] = 127;
 		motor[port4]= 127;
 		motor[port3] = 127;
 		motor[port5]= 127;
-		wait1Msec(1000); //run at full speed for 1 second
+		wait1Msec(2000); //run at full speed for 2 second
+
+		motor[port2] = 120;
+		motor[port3]= 120;
+		motor[port4] = -60;
+		motor[port5] = -60;
+		wait1Msec(2000); //turn robot to the right (about 90 degrees) facing first big thing towards base
+
+		motor[port2] = 127;
+		motor[port4]= 127;
+		motor[port3] = 127;
+		motor[port5]= 127;
+
+		wait1Msec(4000); //run at full speed for 4 second (9 feet)ramming the cone into the home base
+
+		motor[port2] = 120;
+		motor[port3]= 120;
+		motor[port4] = -60;
+		motor[port5] = -60;
+		wait1Msec(2000); //turn robot to the right (about 180 degrees) facing back out towards open area
+
 }
 
-task userControl()
+task main()
 {
 	while(true) {
 		//JOYSTICK/BASE WHEELS
@@ -38,30 +58,9 @@ task userControl()
 		motor[port4] = vexRT[Ch3];
 		motor[port5] = vexRT[Ch3];
 
-		//RIGHT TRIGGER/ARM
-	  if(vexRT[Btn6U] == 1)//when the up trigger is pressed
-	  {
-	  motor[port6] = -127;
-	  motor[port7] = 127;
-	  }
-	  else if(vexRT[Btn6D] == 1)//when the down trigger is pressed
-	  {
-	  motor[port6] = 127;
-	  motor[port7] = -127;
-	  }
-	  else
-	  {
-	  motor[port6] = 0;
-	  motor[port7] = 0;
-	  }
-
-	  //LEFT TRIGGER/CLAW
+		//LEFT TRIGGER/CLAW
 
 	  if(vexRT[Btn5U] == 1)//when the up trigger is pressed
-	  {
-	  motor[port8] = 127;
-	  }
-	  else if(vexRT[Btn5D] == 1)//when the down trigger is pressed
 	  {
 	  motor[port8] = -127;
 	  }
@@ -70,12 +69,32 @@ task userControl()
 	  motor[port8] = 0;
 	  }
 
+		//RIGHT TRIGGER/ARM
+	  if(vexRT[Btn6U] == 1)//when the up trigger is pressed
+	  {
+	  motor[port6] = 127;
+	  motor[port7] = -127;
+	  }
+	  else if(vexRT[Btn6D] == 1)//when the down trigger is pressed
+	  {
+	  motor[port6] = -127;
+	  motor[port7] = 127;
+	  }
+	  else
+	  {
+	  motor[port6] = 0;
+	  motor[port7] = 0;
+	  }
+
+
+
 
 		wait1Msec(50);
 	}
 }
-
+/*
 task main() {
 	startTask(autonomous);
 	startTask(userControl);
 }
+*/
